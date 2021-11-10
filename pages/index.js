@@ -84,6 +84,8 @@ export default function Home() {
 
   const fileInProgress = form.progress > 0 && !form.filePreview;
 
+  const bytesToKB = (bytes) => `${(bytes / Math.pow(1024, 1)).toFixed(2)}KB`;
+
   return (
     <Page>
       <Box as="section">
@@ -195,8 +197,7 @@ export default function Home() {
                 spaceY={12}
               >
                 <Box as="p" fontSize="0.875rem" color="dodgerblue">
-                  Size: {(form.fileSize.before / Math.pow(1024, 1)).toFixed(2)}
-                  KB
+                  Size: {bytesToKB(form.fileSize.before)}
                 </Box>
                 {form.fileSize.after ? (
                   <Box
@@ -205,8 +206,7 @@ export default function Home() {
                     fontWeight={700}
                     color="crimson"
                   >
-                    Size after:{" "}
-                    {(form.fileSize.after / Math.pow(1024, 1)).toFixed(2)}KB
+                    Size after: {bytesToKB(form.fileSize.after)}
                   </Box>
                 ) : (
                   <Box

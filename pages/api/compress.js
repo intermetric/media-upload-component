@@ -26,3 +26,11 @@ export default async function compress(req, res) {
     res.json({ message: "No file received for compression, try again." });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "5mb",
+    },
+  },
+};

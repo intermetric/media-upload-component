@@ -17,6 +17,7 @@ export default async function compress(req, res) {
       break;
     case 100:
       compressionLevel = 9;
+      break;
     default:
       break;
   }

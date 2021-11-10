@@ -24,6 +24,8 @@ export default function Home() {
 
   const [form, setForm] = useState(initialState);
 
+  const resetForm = () => setForm(initialState);
+
   const handleCompression = () => {
     axios
       .post("/api/compress", {
@@ -43,44 +45,42 @@ export default function Home() {
   };
 
   const handleFile = (event) => {
-    setForm({ ...form, error: null });
+    resetForm();
 
     const file = event.target.files[0];
 
     if (file) {
       if (file.size > 5000000) {
         setForm({ ...form, error: "⚠️ File is too large, max 5MB." });
-      }
-
-      const type = file.type.toLowerCase().split("/")[1];
-
-      if (type === "png" || type === "jpg" || type === "jpeg") {
-        let reader = new FileReader();
-
-        reader.readAsDataURL(file);
-
-        reader.onloadstart = () => setForm({ ...form, progress: 10 });
-
-        reader.onloadend = () => {
-          setTimeout(() => {
-            setForm({
-              ...form,
-              progress: 100,
-              filePreview: reader.result,
-              fileSize: { ...form.fileSize, before: file.size },
-              fileType: type,
-            });
-          }, 2000);
-        };
       } else {
-        setForm({ ...form, error: "⚠️ Unsupported format." });
+        const type = file.type.toLowerCase().split("/")[1];
+
+        if (type === "png" || type === "jpg" || type === "jpeg") {
+          let reader = new FileReader();
+
+          reader.readAsDataURL(file);
+
+          reader.onloadstart = () => setForm({ ...form, progress: 10 });
+
+          reader.onloadend = () => {
+            setTimeout(() => {
+              setForm({
+                ...form,
+                progress: 100,
+                filePreview: reader.result,
+                fileSize: { ...form.fileSize, before: file.size },
+                fileType: type,
+              });
+            }, 2000);
+          };
+        } else {
+          setForm({ ...form, error: "⚠️ Unsupported format." });
+        }
       }
     } else {
       setForm({ ...form, error: "⚠️ No file found." });
     }
   };
-
-  const removeFile = () => setForm(initialState);
 
   const fileInProgress = form.progress > 0 && !form.filePreview;
 
@@ -110,7 +110,7 @@ export default function Home() {
               <Box
                 as="span"
                 role="button"
-                onClick={removeFile}
+                onClick={resetForm}
                 aria-label="Remove file"
                 position="absolute"
                 right={16}

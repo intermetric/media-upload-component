@@ -173,17 +173,17 @@ export default function Home() {
                         setForm({ ...form, compression: +event.target.value })
                       }
                       defaultValue={0}
-                      min={0}
-                      max={100}
-                      step={25}
+                      min={5}
+                      max={9}
+                      step={1}
                       w={250}
                     />
                     <Datalist id="compressionTicks">
-                      <option value="0" label="0" />
-                      <option value="25" label="25" />
-                      <option value="50" label="50" />
-                      <option value="75" label="75" />
-                      <option value="100" label="100" />
+                      <option value="5" label="0" />
+                      <option value="6" label="25" />
+                      <option value="7" label="50" />
+                      <option value="8" label="75" />
+                      <option value="9" label="100" />
                     </Datalist>
                   </>
                 )}

@@ -106,7 +106,7 @@ export default function Home() {
                   Preview
                 </Box>
               )}
-              <img src={form.filePreview} />
+              <img src={form.filePreview} alt="Uploaded image" />
               <Box
                 as="span"
                 role="button"

@@ -258,7 +258,7 @@ const Dismiss = () => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="dodgerblue"
-      stroke-Width="2"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
